@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C0E022D0-D470-4D64-BC8B-732AD41EAF33}</ProjectGuid>
+    <ProjectGuid>{0D997209-3CA0-4D60-A448-600F8A44A097}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Biblioteka</RootNamespace>
-    <AssemblyName>Biblioteka</AssemblyName>
+    <RootNamespace>Library</RootNamespace>
+    <AssemblyName>Library</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
