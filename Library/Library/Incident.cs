@@ -8,19 +8,19 @@ namespace Library
 {
     public class Incident
     {
-        private Incident(AUser userUuid, BookUnit bookUnit, DateTime whenOccured)
+        private Incident(AUser user, BookUnit bookUnit, DateTime whenOccured, DateTime endOfIncident)
         {
             IncidentGuid = Guid.NewGuid();
-            User = userUuid;
+            User = user;
             BookUnit = bookUnit;
             WhenOccured = whenOccured;
-            EndOfIncident = whenOccured.AddDays(14);
+            EndOfIncident = endOfIncident;
         }
 
-        private Guid IncidentGuid { get; }
-        private AUser User { get; }
-        private BookUnit BookUnit { get; }
-        private DateTime WhenOccured { get; }
-        private DateTime EndOfIncident { get; }
+        public Guid IncidentGuid { get; }
+        public AUser User { get; }
+        public BookUnit BookUnit { get; }
+        public DateTime WhenOccured { get; }
+        public DateTime EndOfIncident { get; }
     }
 }

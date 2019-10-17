@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    abstract class AUser
+    public abstract class AUser
     {
         protected AUser(string firstName, string lastName)
         {
@@ -14,9 +14,9 @@ namespace Library
             FirstName = firstName;
             LastName = lastName;
         }
-        private Guid UserGuid { get; }
-        private string FirstName { get; }
-        private string LastName { get; }
+        public Guid UserGuid { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
         public abstract float ApplyDiscount(float price);
     }
 }

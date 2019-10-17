@@ -10,6 +10,8 @@ namespace Library
     {
         static void Main(string[] args)
         {
+            BookType test = new BookType("sdf","sdfs", 3,3.0f);
+            
         }
     }
 }

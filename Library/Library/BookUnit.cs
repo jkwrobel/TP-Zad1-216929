@@ -14,8 +14,8 @@ namespace Library
             Book = bookGuid;
             BookPrintNumber = Book.GetHashCode();
         }
-        private BookType Book { get; }
-        private Guid BookUnitGuid { get; }
-        private int BookPrintNumber { get; }
+        public BookType Book { get; }
+        public Guid BookUnitGuid { get; }
+        public int BookPrintNumber { get; }
     }
 }

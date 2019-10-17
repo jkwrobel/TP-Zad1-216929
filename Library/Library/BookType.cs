@@ -14,12 +14,12 @@ namespace Library
             Author = author;
             NumberOfPages = numberOfPages;
             BasePrice = basePrice;
-            Guid = 101;
+            Guid = Guid.NewGuid();
         }
-        private int Guid { get; }
-        private string Title { get; }
-        private string Author { get; }
-        private int NumberOfPages { get; }
-        private float BasePrice { get; }
+        public Guid Guid { get; }
+        public string Title { get; }
+        public string Author { get; }
+        public int NumberOfPages { get; }
+        public float BasePrice { get; }
     }
 }
