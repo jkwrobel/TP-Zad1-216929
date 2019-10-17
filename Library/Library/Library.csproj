@@ -43,8 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AUser.cs" />
+    <Compile Include="BookType.cs" />
+    <Compile Include="BookUnit.cs" />
+    <Compile Include="Incident.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegularUser.cs" />
+    <Compile Include="StudentUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
