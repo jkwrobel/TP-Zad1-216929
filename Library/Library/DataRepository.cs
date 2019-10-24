@@ -6,7 +6,7 @@ namespace Library
 {
     public class DataRepository
     {
-        DataRepository()
+        private DataRepository()
         {
 
             _libraryDataBase = new DataContext();
