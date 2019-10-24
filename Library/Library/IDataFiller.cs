@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    interface IDataFiller
+    public interface IDataFiller
     {
-        void Fill(List<User> users, Dictionary<Guid, BookType> bookTypes,
-            ObservableCollection<Incident> incidents, Dictionary<Guid, BookUnit> bookUnits);
+        void Fill(DataRepository.DataContext dataContext);
 
     }
 }

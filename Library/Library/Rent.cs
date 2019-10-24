@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class Rent : Incident
+    public class Rent : Incident
     {
-        Rent(User user, BookUnit bookUnit, DateTime whenOccured, DateTime endTime) : base(user, bookUnit, whenOccured)
+        public Rent(User user, BookUnit bookUnit, DateTime whenOccured, DateTime endTime) : base(user, bookUnit, whenOccured)
         {
             EndTime = endTime;
             if (endTime == DateTime.MinValue)

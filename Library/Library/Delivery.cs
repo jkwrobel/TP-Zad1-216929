@@ -8,7 +8,7 @@ namespace Library
 {
     public class Delivery : Incident
     {
-        Delivery(User user, BookUnit bookUnit, DateTime whenOccured, float cost) : base(user, bookUnit, whenOccured)
+        public Delivery(User user, BookUnit bookUnit, DateTime whenOccured, float cost) : base(user, bookUnit, whenOccured)
         {
             Cost = cost;
         }

@@ -8,7 +8,7 @@ namespace Library
 {
     public class Destruction : Incident
     {
-        Destruction(User user, BookUnit bookUnit, DateTime whenOccured) : base(user, bookUnit,
+        public Destruction(User user, BookUnit bookUnit, DateTime whenOccured) : base(user, bookUnit,
             whenOccured)
         {
             bookUnit.IsAvailable = BookUnit.AvailableStatus.Destroyed;

@@ -4,17 +4,23 @@ using System.Collections.ObjectModel;
 
 namespace Library
 {
-    internal class DataRepository
+    public class DataRepository
     {
         DataRepository()
         {
-            LibraryDB = new DataContext();
+
+            _libraryDataBase = new DataContext();
         }
 
-        private DataContext LibraryDB;
+        public void AutoFillRepository(IDataFiller dataFiller)
+        {
+            _dataFiller.Fill(_libraryDataBase);
+        }
 
+        private DataContext _libraryDataBase;
+        private IDataFiller _dataFiller;
 
-        class DataContext
+        public class DataContext
         {
             public DataContext()
             {

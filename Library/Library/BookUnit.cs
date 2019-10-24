@@ -8,9 +8,9 @@ namespace Library
 {
     public class BookUnit
     {
-        public BookUnit(BookType book, int bookPrintNumber)
+        public BookUnit(Guid guid, BookType book, int bookPrintNumber)
         {
-            BookUnitGuid = Guid.NewGuid();
+            BookUnitGuid = guid;
             Book = book;
             BookPrintNumber = bookPrintNumber;
             IsAvailable = AvailableStatus.Yes;
