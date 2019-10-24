@@ -8,7 +8,7 @@ namespace Library
 {
     public class User
     {
-        protected User(string firstName, string lastName)
+        public User(string firstName, string lastName)
         {
             UserGuid = Guid.NewGuid();
             FirstName = firstName;
