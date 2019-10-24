@@ -13,17 +13,17 @@ namespace Library
             EndTime = endTime;
             if (endTime == DateTime.MinValue)
             {
-                bookUnit.IsAvailable = false;
+                bookUnit.IsAvailable = BookUnit.AvailableStatus.Rented;
             }
             else
             {
-                if (bookUnit.IsAvailable)
+                if (bookUnit.IsAvailable == BookUnit.AvailableStatus.Yes)
                 {
-                    bookUnit.IsAvailable = false;
+                    bookUnit.IsAvailable = BookUnit.AvailableStatus.Rented;
                 }
                 else
                 {
-                    throw new Exception("Book already rented");
+                    throw new Exception("Book unavailable");
                 }
             }
 

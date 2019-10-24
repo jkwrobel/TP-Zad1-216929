@@ -13,11 +13,18 @@ namespace Library
             BookUnitGuid = Guid.NewGuid();
             Book = book;
             BookPrintNumber = bookPrintNumber;
-            IsAvailable = true;
+            IsAvailable = AvailableStatus.Yes;
         }
         public BookType Book { get; }
         public Guid BookUnitGuid { get; }
         public int BookPrintNumber { get; }
-        public bool IsAvailable { get; set; }
+        public AvailableStatus IsAvailable { get; set; }
+
+        public enum AvailableStatus
+        {
+            Yes = 0,
+            Rented = 1,
+            Destroyed = 2
+        }
     }
 }

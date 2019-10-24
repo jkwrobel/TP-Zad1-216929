@@ -6,9 +6,17 @@ namespace Library
 {
     internal class DataRepository
     {
-        private class DataContext
+        DataRepository()
         {
-            private DataContext()
+            LibraryDB = new DataContext();
+        }
+
+        private DataContext LibraryDB;
+
+
+        class DataContext
+        {
+            public DataContext()
             {
                 Users = new Dictionary<Guid, User>();
                 BookTypes = new Dictionary<Guid, BookType>();
@@ -21,8 +29,5 @@ namespace Library
             public Dictionary<Guid, BookUnit> BookUnits;
 
         }
-
-        private DataContext dataContext;
-
     }
 }

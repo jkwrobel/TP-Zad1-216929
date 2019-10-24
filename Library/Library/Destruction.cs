@@ -11,7 +11,7 @@ namespace Library
         Destruction(User user, BookUnit bookUnit, DateTime whenOccured) : base(user, bookUnit,
             whenOccured)
         {
-            bookUnit.IsAvailable = false;
+            bookUnit.IsAvailable = BookUnit.AvailableStatus.Destroyed;
         }
 
     }
