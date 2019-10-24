@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    public class Incident
+    public abstract class Incident
     {
-        private Incident(AUser user, BookUnit bookUnit, DateTime whenOccured, DateTime endOfIncident)
+        protected Incident(User user, BookUnit bookUnit, DateTime whenOccured)
         {
             IncidentGuid = Guid.NewGuid();
             User = user;
             BookUnit = bookUnit;
             WhenOccured = whenOccured;
-            EndOfIncident = endOfIncident;
         }
 
         public Guid IncidentGuid { get; }
-        public AUser User { get; }
+        public User User { get; }
         public BookUnit BookUnit { get; }
         public DateTime WhenOccured { get; }
-        public DateTime EndOfIncident { get; }
     }
 }

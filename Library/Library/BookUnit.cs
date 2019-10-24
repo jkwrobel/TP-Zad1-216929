@@ -8,14 +8,16 @@ namespace Library
 {
     public class BookUnit
     {
-        public BookUnit(BookType bookGuid)
+        public BookUnit(BookType book, int bookPrintNumber)
         {
             BookUnitGuid = Guid.NewGuid();
-            Book = bookGuid;
-            BookPrintNumber = Book.GetHashCode();
+            Book = book;
+            BookPrintNumber = bookPrintNumber;
+            IsAvailable = true;
         }
         public BookType Book { get; }
         public Guid BookUnitGuid { get; }
         public int BookPrintNumber { get; }
+        public bool IsAvailable { get; set; }
     }
 }
