@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library
 {
-    class DataRepository
+    internal class DataRepository
     {
-        class DataContext
+        private class DataContext
         {
-            public List<User> Users;
+            private DataContext()
+            {
+                Users = new Dictionary<Guid, User>();
+                BookTypes = new Dictionary<Guid, BookType>();
+                Incidents = new ObservableCollection<Incident>();
+                BookUnits = new Dictionary<Guid, BookUnit>();
+            }
+            public Dictionary<Guid, User> Users;
             public Dictionary<Guid, BookType> BookTypes;
             public ObservableCollection<Incident> Incidents;
             public Dictionary<Guid, BookUnit> BookUnits;

@@ -20,5 +20,7 @@ namespace Library
         public User User { get; }
         public BookUnit BookUnit { get; }
         public DateTime WhenOccured { get; }
+
+
     }
 }
