@@ -8,11 +8,11 @@ namespace BaseData
 {
     public class Delivery : Incident
     {
-        public Delivery(User user, BookUnit bookUnit, DateTime whenOccured, float cost) : base(user, bookUnit, whenOccured)
+        public Delivery(Guid guid, User user, BookUnit bookUnit, DateTime whenOccured, float cost) : base(guid, user, bookUnit, whenOccured)
         {
             Cost = cost;
         }
 
-        private float Cost { get; }
+        public float Cost { get; }
     }
 }

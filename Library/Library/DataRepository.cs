@@ -33,9 +33,11 @@ namespace DataRepoName
             return bookTypeInfos;
         }
 
-        private Guid AddType()
+        private Guid AddType(string title, string author, int numberOfPages)
         {
-            throw new NotImplementedException();
+            Guid freshGuid = new Guid();
+            _libraryDataBase.BookTypes.Add(freshGuid, new BookType(freshGuid, title, author, numberOfPages));
+            return freshGuid;
         }
 
         private BookUnitInfo GetBookUnit(Guid guid)
@@ -56,39 +58,89 @@ namespace DataRepoName
             return bookUnitInfos;
         }
 
-        private Guid AddBookUnit()
+        private Guid AddBookUnit(Guid bookTypeGuid, int bookPrintNumber)
         {
-            throw new NotImplementedException();
+            Guid guid = new Guid();
+            _libraryDataBase.BookUnits.Add(guid, new BookUnit(guid, _libraryDataBase.BookTypes[bookTypeGuid], bookPrintNumber));
+            return guid;
         }
 
-        private void GetUser()
+        private UserInfo GetUser(Guid guid)
         {
-
+            User tempUser = _libraryDataBase.Users[guid];
+            return new UserInfo(guid, tempUser.FirstName, tempUser.LastName);
         }
 
-        private void GetAllUsers()
+        private IEnumerable<UserInfo> GetAllUsers()
         {
+            List<UserInfo> userInfos = new List<UserInfo>();
+            foreach (KeyValuePair<Guid, User> pair in _libraryDataBase.Users)
+            {
+                userInfos.Add(new UserInfo(pair.Key, pair.Value.FirstName, pair.Value.LastName));
+            }
 
+            return userInfos;
         }
 
-        private Guid AddUser()
+        private Guid AddUser(string firstName, string lastName)
         {
-            throw new NotImplementedException();
+            Guid guid = new Guid();
+            _libraryDataBase.Users.Add(guid, new User(guid, firstName, lastName));
+            return guid;
         }
 
-        private void GetIncident(Guid guid)
+        private IIncidentInfo makeInfoFromIncident(Incident incident)
         {
+            if (incident is Delivery tempDelivery)
+            {
+                return new DeliveryInfo(incident.IncidentGuid, tempDelivery.BookUnit.BookUnitGuid, tempDelivery.WhenOccured, tempDelivery.Cost);
+            }
 
+            if (incident is Rent tempRent)
+            {
+                return new RentInfo(incident.IncidentGuid, tempRent.BookUnit.BookUnitGuid, tempRent.WhenOccured, tempRent.EndTime);
+            }
+
+            if (incident is Destruction tempDestruction)
+            {
+                return new DestructionInfo(incident.IncidentGuid, tempDestruction.BookUnit.BookUnitGuid, tempDestruction.WhenOccured);
+            }
+
+            return null;
         }
 
-        private void GetAllIncidents()
+        private IIncidentInfo GetIncident(Guid guid)
         {
+            Incident tempIncident = null;
+            foreach (Incident incident in _libraryDataBase.Incidents)
+            {
+                if (incident.IncidentGuid == guid)
+                {
+                    return makeInfoFromIncident(incident);
+                }
+            }
 
+
+
+            return null;
         }
 
-        private Guid AddIncident(Guid unitGuid, Guid userGuid)
+        private IEnumerable<IIncidentInfo> GetAllIncidents()
         {
-            throw new NotImplementedException();
+            List<IIncidentInfo> incidentInfos = new List<IIncidentInfo>();
+            foreach (Incident incident in _libraryDataBase.Incidents)
+            {
+                incidentInfos.Add(makeInfoFromIncident(incident));
+            }
+
+            return incidentInfos;
+        }
+
+        private Guid AddRent(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, DateTime endTime)
+        {
+            Guid guid = new Guid();
+            _libraryDataBase.Incidents.Add(new Rent(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured, endTime));
+            return guid;
         }
 
         #endregion

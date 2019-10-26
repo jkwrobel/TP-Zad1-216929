@@ -31,15 +31,15 @@ namespace DataFiller
             for (int i = 0; i < 3; i++)
             {
                 testUserGuids[i] = new Guid();
-                dataContext.Users.Add(testUserGuids[i], new User(tempFirstNames[i], tempLastNames[i]));
+                dataContext.Users.Add(testUserGuids[i], new User(testUserGuids[i], tempFirstNames[i], tempLastNames[i]));
             }
 
 
-            dataContext.Incidents.Add(new Rent(dataContext.Users[testUserGuids[0]], dataContext.BookUnits[testUnitGuids[0]],
+            dataContext.Incidents.Add(new Rent(Guid.NewGuid(), dataContext.Users[testUserGuids[0]], dataContext.BookUnits[testUnitGuids[0]],
                 new DateTime(2019, 5, 34, 4, 6, 13), DateTime.MinValue));
-            dataContext.Incidents.Add(new Delivery(dataContext.Users[testUserGuids[1]],
+            dataContext.Incidents.Add(new Delivery(Guid.NewGuid(), dataContext.Users[testUserGuids[1]],
                 dataContext.BookUnits[testUnitGuids[1]], new DateTime(2018, 2, 4), 31.5f));
-            dataContext.Incidents.Add(new Destruction(dataContext.Users[testUserGuids[2]], dataContext.BookUnits[testUnitGuids[2]],
+            dataContext.Incidents.Add(new Destruction(Guid.NewGuid(), dataContext.Users[testUserGuids[2]], dataContext.BookUnits[testUnitGuids[2]],
                 new DateTime(2018, 2, 15, 21, 23, 43)));
 
         }

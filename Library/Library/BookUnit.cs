@@ -4,14 +4,14 @@ namespace BaseData
 {
     public class BookUnit
     {
-        public BookUnit(Guid guid, BookType book, int bookPrintNumber)
+        public BookUnit(Guid guid, BookType bookType, int bookPrintNumber)
         {
             BookUnitGuid = guid;
-            Book = book;
+            BookType = bookType;
             BookPrintNumber = bookPrintNumber;
             IsAvailable = AvailableStatus.Yes;
         }
-        public BookType Book { get; }
+        public BookType BookType { get; }
         public Guid BookUnitGuid { get; }
         public int BookPrintNumber { get; }
         public AvailableStatus IsAvailable { get; set; }

@@ -4,9 +4,9 @@ namespace BaseData
 {
     public abstract class Incident
     {
-        protected Incident(User user, BookUnit bookUnit, DateTime whenOccured)
+        protected Incident(Guid guid, User user, BookUnit bookUnit, DateTime whenOccured)
         {
-            IncidentGuid = Guid.NewGuid();
+            IncidentGuid = guid;
             User = user;
             BookUnit = bookUnit;
             WhenOccured = whenOccured;

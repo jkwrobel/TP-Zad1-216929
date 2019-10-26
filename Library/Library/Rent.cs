@@ -8,7 +8,7 @@ namespace BaseData
 {
     public class Rent : Incident
     {
-        public Rent(User user, BookUnit bookUnit, DateTime whenOccured, DateTime endTime) : base(user, bookUnit, whenOccured)
+        public Rent(Guid guid, User user, BookUnit bookUnit, DateTime whenOccured, DateTime endTime) : base(guid, user, bookUnit, whenOccured)
         {
             EndTime = endTime;
             if (endTime == DateTime.MinValue)
@@ -23,7 +23,7 @@ namespace BaseData
                 }
                 else
                 {
-                    throw new Exception("Book unavailable");
+                    throw new Exception("BookType unavailable");
                 }
             }
 

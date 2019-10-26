@@ -4,7 +4,7 @@ namespace BaseData
 {
     public class Destruction : Incident
     {
-        public Destruction(User user, BookUnit bookUnit, DateTime whenOccured) : base(user, bookUnit,
+        public Destruction(Guid guid, User user, BookUnit bookUnit, DateTime whenOccured) : base(guid, user, bookUnit,
             whenOccured)
         {
             bookUnit.IsAvailable = BookUnit.AvailableStatus.Destroyed;
