@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Library
+namespace BaseData
 {
     public class Destruction : Incident
     {

@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace BaseData
 {
     public class BookType
     {
-        public BookType(Guid bookGuid, string title, string author, int numberOfPages)
+        public BookType(Guid bookBookGuid, string title, string author, int numberOfPages)
         {
             Title = title;
             Author = author;
             NumberOfPages = numberOfPages;
-            Guid = bookGuid;
+            BookGuid = bookBookGuid;
         }
-        public Guid Guid { get; }
+        public Guid BookGuid { get; }
         public string Title { get; }
         public string Author { get; }
         public int NumberOfPages { get; }

@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace DataRepoName
 {
     public interface IDataFiller
     {
