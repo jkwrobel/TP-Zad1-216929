@@ -7,7 +7,7 @@ namespace DataRepoName
 {
     public class DataRepository
     {
-        private DataRepository()
+        public DataRepository()
         {
 
             _libraryDataBase = new DataContext();
@@ -15,13 +15,13 @@ namespace DataRepoName
 
         #region CRUDmethods
 
-        private BookTypeInfo GetBookType(Guid guid)
+        public BookTypeInfo GetBookType(Guid guid)
         {
             BookType tempBookType = _libraryDataBase.BookTypes[guid];
             return new BookTypeInfo();
         }
 
-        private IEnumerable<BookTypeInfo> GetAllTypes()
+        public IEnumerable<BookTypeInfo> GetAllTypes()
         {
             List<BookTypeInfo> bookTypeInfos = new List<BookTypeInfo>();
             foreach (KeyValuePair<Guid, BookType> pair in _libraryDataBase.BookTypes)
@@ -33,20 +33,20 @@ namespace DataRepoName
             return bookTypeInfos;
         }
 
-        private Guid AddType(string title, string author, int numberOfPages)
+        public Guid AddType(string title, string author, int numberOfPages)
         {
             Guid freshGuid = new Guid();
             _libraryDataBase.BookTypes.Add(freshGuid, new BookType(freshGuid, title, author, numberOfPages));
             return freshGuid;
         }
 
-        private BookUnitInfo GetBookUnit(Guid guid)
+        public BookUnitInfo GetBookUnit(Guid guid)
         {
             BookUnit bookUnit = _libraryDataBase.BookUnits[guid];
             return new BookUnitInfo(guid, bookUnit.BookType.BookGuid, bookUnit.BookPrintNumber, bookUnit.IsAvailable.ToString());
         }
 
-        private IEnumerable<BookUnitInfo> GetAllBookUnits()
+        public IEnumerable<BookUnitInfo> GetAllBookUnits()
         {
             List<BookUnitInfo> bookUnitInfos = new List<BookUnitInfo>();
             foreach (KeyValuePair<Guid, BookUnit> pair in _libraryDataBase.BookUnits)
@@ -58,20 +58,20 @@ namespace DataRepoName
             return bookUnitInfos;
         }
 
-        private Guid AddBookUnit(Guid bookTypeGuid, int bookPrintNumber)
+        public Guid AddBookUnit(Guid bookTypeGuid, int bookPrintNumber)
         {
             Guid guid = new Guid();
             _libraryDataBase.BookUnits.Add(guid, new BookUnit(guid, _libraryDataBase.BookTypes[bookTypeGuid], bookPrintNumber));
             return guid;
         }
 
-        private UserInfo GetUser(Guid guid)
+        public UserInfo GetUser(Guid guid)
         {
             User tempUser = _libraryDataBase.Users[guid];
             return new UserInfo(guid, tempUser.FirstName, tempUser.LastName);
         }
 
-        private IEnumerable<UserInfo> GetAllUsers()
+        public IEnumerable<UserInfo> GetAllUsers()
         {
             List<UserInfo> userInfos = new List<UserInfo>();
             foreach (KeyValuePair<Guid, User> pair in _libraryDataBase.Users)
@@ -82,14 +82,14 @@ namespace DataRepoName
             return userInfos;
         }
 
-        private Guid AddUser(string firstName, string lastName)
+        public Guid AddUser(string firstName, string lastName)
         {
             Guid guid = new Guid();
             _libraryDataBase.Users.Add(guid, new User(guid, firstName, lastName));
             return guid;
         }
 
-        private IIncidentInfo makeInfoFromIncident(Incident incident)
+        public IIncidentInfo makeInfoFromIncident(Incident incident)
         {
             if (incident is Delivery tempDelivery)
             {
@@ -109,7 +109,7 @@ namespace DataRepoName
             return null;
         }
 
-        private IIncidentInfo GetIncident(Guid guid)
+        public IIncidentInfo GetIncident(Guid guid)
         {
             Incident tempIncident = null;
             foreach (Incident incident in _libraryDataBase.Incidents)
@@ -125,7 +125,7 @@ namespace DataRepoName
             return null;
         }
 
-        private IEnumerable<IIncidentInfo> GetAllIncidents()
+        public IEnumerable<IIncidentInfo> GetAllIncidents()
         {
             List<IIncidentInfo> incidentInfos = new List<IIncidentInfo>();
             foreach (Incident incident in _libraryDataBase.Incidents)
@@ -136,7 +136,7 @@ namespace DataRepoName
             return incidentInfos;
         }
 
-        private Guid AddRent(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, DateTime endTime)
+        public Guid AddRent(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, DateTime endTime)
         {
             Guid guid = new Guid();
             _libraryDataBase.Incidents.Add(new Rent(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured, endTime));
@@ -147,7 +147,7 @@ namespace DataRepoName
 
         #region DataStructs
 
-        private struct BookTypeInfo
+        public struct BookTypeInfo
         {
             public BookTypeInfo(Guid bookGuid, string title, string author, int numberOfPages)
             {
@@ -162,7 +162,7 @@ namespace DataRepoName
             public int NumberOfPages;
         }
 
-        private struct BookUnitInfo
+        public struct BookUnitInfo
         {
             public BookUnitInfo(Guid bookUnitGuid, Guid bookTypeGuid, int printNumber, string availableStatusInfo)
             {
@@ -177,7 +177,7 @@ namespace DataRepoName
             public string AvailableStatusInfo;
         }
 
-        private struct UserInfo
+        public struct UserInfo
         {
             public UserInfo(Guid userGuid, string firstName, string lastName)
             {
@@ -193,11 +193,11 @@ namespace DataRepoName
 
         #region IncidentStructs
 
-        private interface IIncidentInfo
+        public interface IIncidentInfo
         {
         }
 
-        public struct DeliveryInfo : IIncidentInfo
+        struct DeliveryInfo : IIncidentInfo
         {
             public DeliveryInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, float cost)
             {

@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataService.cs" />
     <Compile Include="Destruction.cs" />
     <Compile Include="User.cs" />
     <Compile Include="BookType.cs" />
     <Compile Include="BookUnit.cs" />
-    <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="IDataFiller.cs" />
