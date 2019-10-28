@@ -8,20 +8,20 @@ namespace DataFiller
     {
         public override void Fill(DataRepository.DataContext dataContext)
         {
-            string[] tempTitles = new[] { "Pan Tadeusz", " Don Kichot", "Don Quixote" };
-            string[] tempAuthors = new[] { "Mickiewicz", " Von Ktokolwiek", "Znaczenia vel Toniema" };
+            string[] tempTitles = new[] { "Pan Tadeusz", "Don Kichot", "Don Quixote" };
+            string[] tempAuthors = new[] { "Mickiewicz", "Von Ktokolwiek", "Znaczenia vel Toniema" };
             int[] tempPages = new[] { 625, 531, 35 };
             testBookGuids = new Guid[4];
             for (int i = 0; i < 3; i++)
             {
-                testBookGuids[i] = new Guid();
+                testBookGuids[i] = Guid.NewGuid();
                 dataContext.BookTypes.Add(testBookGuids[i], new BookType(testBookGuids[i], tempTitles[i], tempAuthors[i], tempPages[i]));
             }
 
             testUnitGuids = new Guid[4];
             for (int i = 0; i < 3; i++)
             {
-                testUnitGuids[i] = new Guid();
+                testUnitGuids[i] = Guid.NewGuid();
                 dataContext.BookUnits.Add(testUnitGuids[i], new BookUnit(testUnitGuids[i], dataContext.BookTypes[testBookGuids[i]], (i + 3) * (i + 2)));
             }
 
@@ -30,7 +30,7 @@ namespace DataFiller
             testUserGuids = new Guid[4];
             for (int i = 0; i < 3; i++)
             {
-                testUserGuids[i] = new Guid();
+                testUserGuids[i] = Guid.NewGuid();
                 dataContext.Users.Add(testUserGuids[i], new User(testUserGuids[i], tempFirstNames[i], tempLastNames[i]));
             }
 
