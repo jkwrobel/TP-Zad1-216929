@@ -89,7 +89,7 @@ namespace DataRepoName
             return guid;
         }
 
-        public IIncidentInfo makeInfoFromIncident(Incident incident)
+        public IIncidentInfo MakeInfoFromIncident(Incident incident)
         {
             if (incident is Delivery tempDelivery)
             {
@@ -116,7 +116,7 @@ namespace DataRepoName
             {
                 if (incident.IncidentGuid == guid)
                 {
-                    return makeInfoFromIncident(incident);
+                    return MakeInfoFromIncident(incident);
                 }
             }
 
@@ -130,7 +130,7 @@ namespace DataRepoName
             List<IIncidentInfo> incidentInfos = new List<IIncidentInfo>();
             foreach (Incident incident in _libraryDataBase.Incidents)
             {
-                incidentInfos.Add(makeInfoFromIncident(incident));
+                incidentInfos.Add(MakeInfoFromIncident(incident));
             }
 
             return incidentInfos;
@@ -197,7 +197,7 @@ namespace DataRepoName
         {
         }
 
-        struct DeliveryInfo : IIncidentInfo
+        public struct DeliveryInfo : IIncidentInfo
         {
             public DeliveryInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, float cost)
             {
@@ -249,13 +249,13 @@ namespace DataRepoName
         #endregion
 
 
-        public void AutoFillRepository(IDataFiller dataFiller)
+        public void AutoFillRepository(AbsDataFiller absDataFiller)
         {
-            _dataFiller.Fill(_libraryDataBase);
+            _absDataFiller.Fill(_libraryDataBase);
         }
 
         private DataContext _libraryDataBase;
-        private IDataFiller _dataFiller;
+        private AbsDataFiller _absDataFiller;
 
         public class DataContext
         {
@@ -266,10 +266,10 @@ namespace DataRepoName
                 Incidents = new ObservableCollection<Incident>();
                 BookUnits = new Dictionary<Guid, BookUnit>();
             }
-            public Dictionary<Guid, User> Users;
-            public Dictionary<Guid, BookType> BookTypes;
-            public ObservableCollection<Incident> Incidents;
-            public Dictionary<Guid, BookUnit> BookUnits;
+            public Dictionary<Guid, User> Users { get; set; }
+            public Dictionary<Guid, BookType> BookTypes { get; set; }
+            public ObservableCollection<Incident> Incidents { get; set; }
+            public Dictionary<Guid, BookUnit> BookUnits { get; set; }
 
         }
     }

@@ -8,6 +8,7 @@ namespace LibraryTestProject
         [TestMethod]
         public void TestMethod1()
         {
+            
         }
     }
 }
