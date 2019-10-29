@@ -10,14 +10,25 @@ namespace DataServNamespace
             _dataRepository = dataRepository;
         }
 
-        public IEnumerable<DataRepository.BookUnitInfo> GetAllBookUnitInfosInfos()
+        public IEnumerable<DataRepository.BookUnitInfo> GetAllBookUnitInfos()
         {
-            throw new NotImplementedException();
+            return _dataRepository.GetAllBookUnits();
         }
 
-        public IEnumerable<DataRepository.IIncidentInfo> GetIncidentInfosForUser(Guid userGuid)
+        public IEnumerable<DataRepository.AbsIncidentInfo> GetIncidentInfosForUser(Guid userGuid)
         {
-            throw new NotImplementedException();
+            IEnumerable<DataRepository.AbsIncidentInfo> tempInfos = _dataRepository.GetAllIncidents();
+
+            List<DataRepository.AbsIncidentInfo> incidentForUser = new List<DataRepository.AbsIncidentInfo>();
+            foreach (DataRepository.AbsIncidentInfo incidentInfo in tempInfos)
+            {
+                if (incidentInfo.UserGuid != userGuid)
+                {
+                    incidentForUser.Add(incidentInfo);
+                } 
+            }
+
+            return incidentForUser;
         }
 
         public DataRepository.RentInfo AddRent(Guid bookUnitGuid, Guid userGuid, DateTime whenStarted,
@@ -37,7 +48,7 @@ namespace DataServNamespace
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DataRepository.IIncidentInfo> GetIncidentInfosBetweenDates(DateTime starTime,
+        public IEnumerable<DataRepository.AbsIncidentInfo> GetIncidentInfosBetweenDates(DateTime starTime,
             DateTime endTime)
         {
             throw new NotImplementedException();

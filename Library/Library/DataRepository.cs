@@ -93,7 +93,7 @@ namespace DataRepoName
             return guid;
         }
 
-        public IIncidentInfo MakeInfoFromIncident(Incident incident)
+        public AbsIncidentInfo MakeInfoFromIncident(Incident incident)
         {
             if (incident is Delivery tempDelivery)
             {
@@ -113,7 +113,7 @@ namespace DataRepoName
             return null;
         }
 
-        public IIncidentInfo GetIncident(Guid guid)
+        public AbsIncidentInfo GetIncident(Guid guid)
         {
             Incident tempIncident = null;
             foreach (Incident incident in _libraryDataBase.Incidents)
@@ -129,9 +129,9 @@ namespace DataRepoName
             return null;
         }
 
-        public IEnumerable<IIncidentInfo> GetAllIncidents()
+        public IEnumerable<AbsIncidentInfo> GetAllIncidents()
         {
-            List<IIncidentInfo> incidentInfos = new List<IIncidentInfo>();
+            List<AbsIncidentInfo> incidentInfos = new List<AbsIncidentInfo>();
             foreach (Incident incident in _libraryDataBase.Incidents)
             {
                 incidentInfos.Add(MakeInfoFromIncident(incident));
@@ -197,53 +197,42 @@ namespace DataRepoName
 
         #region IncidentStructs
 
-        public interface IIncidentInfo
+        public abstract class AbsIncidentInfo
         {
-        }
-
-        public struct DeliveryInfo : IIncidentInfo
-        {
-            public DeliveryInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, float cost)
+            protected AbsIncidentInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured)
             {
                 UserGuid = userGuid;
                 BookGuid = bookGuid;
                 WhenOccured = whenOccured;
-                Cost = cost;
             }
-
             public Guid UserGuid;
             public Guid BookGuid;
             public DateTime WhenOccured;
+        }
+
+        public class DeliveryInfo : AbsIncidentInfo
+        {
+            public DeliveryInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, float cost) : base(userGuid, bookGuid, whenOccured)
+            {
+                Cost = cost;
+            }
             public float Cost;
         }
 
-        public struct DestructionInfo : IIncidentInfo
+        public class DestructionInfo : AbsIncidentInfo
         {
-            public DestructionInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured)
+            public DestructionInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured) : base(userGuid, bookGuid, whenOccured)
             {
-                UserGuid = userGuid;
-                BookGuid = bookGuid;
-                WhenOccured = whenOccured;
+                
             }
-
-            public Guid UserGuid;
-            public Guid BookGuid;
-            public DateTime WhenOccured;
         }
 
-        public struct RentInfo : IIncidentInfo
+        public class RentInfo : AbsIncidentInfo
         {
-            public RentInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, DateTime endTime)
+            public RentInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, DateTime endTime) : base(userGuid, bookGuid, whenOccured)
             {
-                UserGuid = userGuid;
-                BookGuid = bookGuid;
-                WhenOccured = whenOccured;
                 EndTime = endTime;
             }
-
-            public Guid UserGuid;
-            public Guid BookGuid;
-            public DateTime WhenOccured;
             public DateTime EndTime;
         }
 
