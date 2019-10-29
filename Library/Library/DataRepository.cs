@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace DataRepoName
 {
@@ -11,6 +13,8 @@ namespace DataRepoName
         {
 
             _libraryDataBase = new DataContext();
+
+            _libraryDataBase.Incidents.CollectionChanged += IncidentsModyfied;
         }
 
         #region CRUDmethods
@@ -18,7 +22,7 @@ namespace DataRepoName
         public BookTypeInfo GetBookType(Guid guid)
         {
             BookType tempBookType = _libraryDataBase.BookTypes[guid];
-            return new BookTypeInfo();
+            return new BookTypeInfo(tempBookType.BookGuid, tempBookType.Title, tempBookType.Author, tempBookType.NumberOfPages);
         }
 
         public IEnumerable<BookTypeInfo> GetAllTypes()
@@ -271,6 +275,14 @@ namespace DataRepoName
             public ObservableCollection<Incident> Incidents { get; set; }
             public Dictionary<Guid, BookUnit> BookUnits { get; set; }
 
+        }
+
+        private void IncidentsModyfied(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        {
+            if (eventArgs?.NewItems != null)
+            {
+                Debug.WriteLine("Modyfied Incident " + eventArgs.NewItems[0].ToString());
+            }
         }
     }
 }
