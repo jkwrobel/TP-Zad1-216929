@@ -37,26 +37,47 @@ namespace DataServNamespace
             return _dataRepository.AddRent( bookUnitGuid, userGuid, whenStarted, endTime);
         }
 
-        public DataRepository.DestructionInfo AddDestruction(Guid bookUnitGuid, Guid userGuid, DateTime whenStarted)
+        public Guid AddDestruction(Guid userGuid, Guid bookUnitGuid, DateTime whenStarted)
         {
-            throw new NotImplementedException();
+
+            return _dataRepository.AddDestruction(userGuid, bookUnitGuid, whenStarted);
         }
 
-        public DataRepository.DeliveryInfo AddDelivery(Guid bookUnitGuid, Guid userGuid, DateTime whenStarted,
+        public Guid AddDelivery(Guid userGuid, Guid bookUnitGuid, DateTime whenStarted,
             float cost)
         {
-            throw new NotImplementedException();
+            return _dataRepository.AddDelivery(userGuid, bookUnitGuid, whenStarted, cost);
         }
 
         public IEnumerable<DataRepository.AbsIncidentInfo> GetIncidentInfosBetweenDates(DateTime starTime,
             DateTime endTime)
         {
-            throw new NotImplementedException();
+            List<DataRepository.AbsIncidentInfo> incidentInfos = new List<DataRepository.AbsIncidentInfo>(_dataRepository.GetAllIncidents());
+            List<DataRepository.AbsIncidentInfo> incidentInfosBetweenDates = new List<DataRepository.AbsIncidentInfo>();
+            foreach (DataRepository.AbsIncidentInfo incidentInfo in incidentInfos)
+            {
+                if (incidentInfo.WhenOccured > starTime && incidentInfo.WhenOccured < endTime)
+                {
+                    incidentInfosBetweenDates.Add(incidentInfo);
+                }
+            }
+
+            return incidentInfosBetweenDates;
         }
 
         public IEnumerable<DataRepository.BookUnitInfo> GetBookUnitInfosForBookType(Guid bookTypeGuid)
         {
-            throw new NotImplementedException();
+            List<DataRepository.BookUnitInfo> bookUnitInfos = new List<DataRepository.BookUnitInfo>(_dataRepository.GetAllBookUnits());_dataRepository.GetAllBookUnits();
+            List<DataRepository.BookUnitInfo> bookUnitInfosForType = new List<DataRepository.BookUnitInfo>();
+            foreach (DataRepository.BookUnitInfo unitInfo in bookUnitInfos)
+            {
+                if (unitInfo.BookTypeGuid == bookTypeGuid)
+                {
+                    bookUnitInfosForType.Add(unitInfo);
+                }
+            }
+
+            return bookUnitInfosForType;
         }
 
         private DataRepository _dataRepository;
