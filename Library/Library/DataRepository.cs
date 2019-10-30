@@ -113,6 +113,30 @@ namespace DataRepoName
             return null;
         }
 
+        public Guid AddDestruction(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured)
+        {
+            Guid guid = Guid.NewGuid();
+            _libraryDataBase.Incidents.Add(new Destruction(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured));
+            return guid;
+
+        }
+
+        public Guid AddRent(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, DateTime endTime)
+        {
+            Guid guid = Guid.NewGuid();
+            _libraryDataBase.Incidents.Add(new Rent(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured, endTime));
+            return guid;
+
+        }
+
+        public Guid AddDelivery(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, float cost)
+        {
+            Guid guid = Guid.NewGuid();
+            _libraryDataBase.Incidents.Add(new Delivery(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured, cost));
+            return guid;
+
+        }
+
         public AbsIncidentInfo GetIncident(Guid guid)
         {
             Incident tempIncident = null;
@@ -139,14 +163,7 @@ namespace DataRepoName
 
             return incidentInfos;
         }
-
-        public Guid AddRent(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, DateTime endTime)
-        {
-            Guid guid = new Guid();
-            _libraryDataBase.Incidents.Add(new Rent(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured, endTime));
-            return guid;
-        }
-
+        
         #endregion
 
         #region DataStructs
@@ -223,7 +240,7 @@ namespace DataRepoName
         {
             public DestructionInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured) : base(userGuid, bookGuid, whenOccured)
             {
-                
+
             }
         }
 

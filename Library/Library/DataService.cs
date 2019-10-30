@@ -31,10 +31,10 @@ namespace DataServNamespace
             return incidentForUser;
         }
 
-        public DataRepository.RentInfo AddRent(Guid bookUnitGuid, Guid userGuid, DateTime whenStarted,
+        public Guid AddRent(Guid bookUnitGuid, Guid userGuid, DateTime whenStarted,
             DateTime endTime)
         {
-            throw new NotImplementedException();
+            return _dataRepository.AddRent( bookUnitGuid, userGuid, whenStarted, endTime);
         }
 
         public DataRepository.DestructionInfo AddDestruction(Guid bookUnitGuid, Guid userGuid, DateTime whenStarted)
