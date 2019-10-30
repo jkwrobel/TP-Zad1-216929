@@ -97,17 +97,17 @@ namespace DataRepoName
         {
             if (incident is Delivery tempDelivery)
             {
-                return new DeliveryInfo(incident.User.UserGuid, tempDelivery.BookUnit.BookUnitGuid, tempDelivery.WhenOccured, tempDelivery.Cost);
+                return new DeliveryInfo(incident.IncidentGuid, incident.User.UserGuid, tempDelivery.BookUnit.BookUnitGuid, tempDelivery.WhenOccured, tempDelivery.Cost);
             }
 
             if (incident is Rent tempRent)
             {
-                return new RentInfo(incident.User.UserGuid, tempRent.BookUnit.BookUnitGuid, tempRent.WhenOccured, tempRent.EndTime);
+                return new RentInfo(incident.IncidentGuid, incident.User.UserGuid, tempRent.BookUnit.BookUnitGuid, tempRent.WhenOccured, tempRent.EndTime);
             }
 
             if (incident is Destruction tempDestruction)
             {
-                return new DestructionInfo(incident.User.UserGuid, tempDestruction.BookUnit.BookUnitGuid, tempDestruction.WhenOccured);
+                return new DestructionInfo(incident.IncidentGuid, incident.User.UserGuid, tempDestruction.BookUnit.BookUnitGuid, tempDestruction.WhenOccured);
             }
 
             return null;
@@ -145,7 +145,6 @@ namespace DataRepoName
 
         public AbsIncidentInfo GetIncident(Guid guid)
         {
-            Incident tempIncident = null;
             foreach (Incident incident in _libraryDataBase.Incidents)
             {
                 if (incident.IncidentGuid == guid)
@@ -222,12 +221,15 @@ namespace DataRepoName
 
         public abstract class AbsIncidentInfo
         {
-            protected AbsIncidentInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured)
+            protected AbsIncidentInfo(Guid incidentGuid, Guid userGuid, Guid bookGuid, DateTime whenOccured)
             {
+                IncidetGuid = incidentGuid;
                 UserGuid = userGuid;
                 BookGuid = bookGuid;
                 WhenOccured = whenOccured;
             }
+
+            public Guid IncidetGuid;
             public Guid UserGuid;
             public Guid BookGuid;
             public DateTime WhenOccured;
@@ -235,7 +237,7 @@ namespace DataRepoName
 
         public class DeliveryInfo : AbsIncidentInfo
         {
-            public DeliveryInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, float cost) : base(userGuid, bookGuid, whenOccured)
+            public DeliveryInfo(Guid incidentGuid, Guid userGuid, Guid bookGuid, DateTime whenOccured, float cost) : base(incidentGuid, userGuid, bookGuid, whenOccured)
             {
                 Cost = cost;
             }
@@ -244,7 +246,7 @@ namespace DataRepoName
 
         public class DestructionInfo : AbsIncidentInfo
         {
-            public DestructionInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured) : base(userGuid, bookGuid, whenOccured)
+            public DestructionInfo(Guid incidentGuid, Guid userGuid, Guid bookGuid, DateTime whenOccured) : base(incidentGuid, userGuid, bookGuid, whenOccured)
             {
 
             }
@@ -252,7 +254,7 @@ namespace DataRepoName
 
         public class RentInfo : AbsIncidentInfo
         {
-            public RentInfo(Guid userGuid, Guid bookGuid, DateTime whenOccured, DateTime endTime) : base(userGuid, bookGuid, whenOccured)
+            public RentInfo(Guid incidentGuid, Guid userGuid, Guid bookGuid, DateTime whenOccured, DateTime endTime) : base(incidentGuid, userGuid, bookGuid, whenOccured)
             {
                 EndTime = endTime;
             }

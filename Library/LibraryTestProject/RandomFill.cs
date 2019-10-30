@@ -24,7 +24,7 @@ namespace DataFiller
             {
                 testUnitGuids[i] = Guid.NewGuid();
                 dataContext.BookUnits.Add(testUnitGuids[i], new BookUnit(testUnitGuids[i],
-                    dataContext.BookTypes[testIncidentGuids[randGenerator.Next(4)]], randGenerator.Next(3, 300)));
+                    dataContext.BookTypes[testBookGuids[randGenerator.Next(4)]], randGenerator.Next(3, 300)));
             }
 
             testUserGuids = new Guid[4];
