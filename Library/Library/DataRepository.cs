@@ -97,17 +97,17 @@ namespace DataRepoName
         {
             if (incident is Delivery tempDelivery)
             {
-                return new DeliveryInfo(incident.IncidentGuid, tempDelivery.BookUnit.BookUnitGuid, tempDelivery.WhenOccured, tempDelivery.Cost);
+                return new DeliveryInfo(incident.User.UserGuid, tempDelivery.BookUnit.BookUnitGuid, tempDelivery.WhenOccured, tempDelivery.Cost);
             }
 
             if (incident is Rent tempRent)
             {
-                return new RentInfo(incident.IncidentGuid, tempRent.BookUnit.BookUnitGuid, tempRent.WhenOccured, tempRent.EndTime);
+                return new RentInfo(incident.User.UserGuid, tempRent.BookUnit.BookUnitGuid, tempRent.WhenOccured, tempRent.EndTime);
             }
 
             if (incident is Destruction tempDestruction)
             {
-                return new DestructionInfo(incident.IncidentGuid, tempDestruction.BookUnit.BookUnitGuid, tempDestruction.WhenOccured);
+                return new DestructionInfo(incident.User.UserGuid, tempDestruction.BookUnit.BookUnitGuid, tempDestruction.WhenOccured);
             }
 
             return null;
@@ -116,7 +116,9 @@ namespace DataRepoName
         public Guid AddDestruction(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured)
         {
             Guid guid = Guid.NewGuid();
-            _libraryDataBase.Incidents.Add(new Destruction(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured));
+            User tempUser = _libraryDataBase.Users[userGuid];
+            BookUnit temBookUnit = _libraryDataBase.BookUnits[bookUnitGuid];
+            _libraryDataBase.Incidents.Add(new Destruction(guid, tempUser, temBookUnit, whenOccured));
             return guid;
 
         }
@@ -132,7 +134,11 @@ namespace DataRepoName
         public Guid AddDelivery(Guid userGuid, Guid bookUnitGuid, DateTime whenOccured, float cost)
         {
             Guid guid = Guid.NewGuid();
-            _libraryDataBase.Incidents.Add(new Delivery(guid, _libraryDataBase.Users[userGuid], _libraryDataBase.BookUnits[bookUnitGuid], whenOccured, cost));
+            User tempUser = _libraryDataBase.Users[userGuid];
+            BookUnit temBookUnit = _libraryDataBase.BookUnits[bookUnitGuid];
+            _libraryDataBase.Incidents.Add(new Delivery(guid,
+                tempUser, 
+                temBookUnit, whenOccured, cost));
             return guid;
 
         }
@@ -261,11 +267,10 @@ namespace DataRepoName
 
         public void AutoFillRepository(AbsDataFiller absDataFiller)
         {
-            _absDataFiller.Fill(_libraryDataBase);
+            absDataFiller.Fill(_libraryDataBase);
         }
 
         private DataContext _libraryDataBase;
-        private AbsDataFiller _absDataFiller;
 
         public class DataContext
         {

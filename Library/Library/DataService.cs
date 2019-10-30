@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 namespace DataServNamespace
 {
-    internal class DataService
+    public class DataService
     {
         public DataService(DataRepository dataRepository)
         {
@@ -22,7 +22,7 @@ namespace DataServNamespace
             List<DataRepository.AbsIncidentInfo> incidentForUser = new List<DataRepository.AbsIncidentInfo>();
             foreach (DataRepository.AbsIncidentInfo incidentInfo in tempInfos)
             {
-                if (incidentInfo.UserGuid != userGuid)
+                if (incidentInfo.UserGuid == userGuid)
                 {
                     incidentForUser.Add(incidentInfo);
                 } 
